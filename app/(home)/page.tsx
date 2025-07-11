@@ -1,9 +1,11 @@
-import { Button } from "@/components/ui/button";
+import { Navbar } from "@/components/home/header/navbar";
+import HeroSection from "@/components/home/hero-section";
 
 export default function Home() {
   return (
     <div>
-      <Button>Hello</Button>
+      <Navbar />
+      <HeroSection />
     </div>
   );
 }
