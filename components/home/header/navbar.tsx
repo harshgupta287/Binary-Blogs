@@ -5,8 +5,8 @@ import { Input } from "@/components/ui/input";
 import { Search, Menu, X } from "lucide-react";
 import { ModeToggle } from "../../dark-mode";
 import Link from "next/link";
-// import { SignedOut, SignInButton, SignUpButton } from "@clerk/nextjs";
-// import { SignedIn, UserButton } from "@clerk/nextjs";
+import { SignedOut, SignInButton, SignUpButton } from "@clerk/nextjs";
+import { SignedIn, UserButton } from "@clerk/nextjs";
 import SearchInput from "./search-input";
 
 export function Navbar() {
@@ -66,7 +66,7 @@ export function Navbar() {
             <ModeToggle />
 
             {/* User Actions */}
-            {/* <SignedIn>
+            <SignedIn>
               <UserButton afterSignOutUrl="/" />
             </SignedIn>
             <SignedOut>
@@ -78,7 +78,7 @@ export function Navbar() {
                   <Button>Sign up</Button>
                 </SignUpButton>
               </div>
-            </SignedOut> */}
+            </SignedOut>
 
             {/* Mobile Menu Button */}
             <Button
@@ -144,7 +144,7 @@ export function Navbar() {
             </div>
 
             {/* Mobile Auth Buttons */}
-            {/* <SignedOut>
+            <SignedOut>
               <div className="px-4 flex flex-col gap-2">
                 <SignInButton>
                   <Button variant="outline" className="w-full">
@@ -155,7 +155,7 @@ export function Navbar() {
                   <Button className="w-full">Sign up</Button>
                 </SignUpButton>
               </div>
-            </SignedOut> */}
+            </SignedOut>
           </div>
         )}
       </div>
