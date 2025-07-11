@@ -6,29 +6,29 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import "react-quill-new/dist/quill.snow.css";
-// import { createArticles } from "@/actions/create-article";
+import { createArticles } from "@/actions/create-article";
 import dynamic from "next/dynamic";
 const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
  
 export function CreateArticlePage() {
   const [content, setContent] = useState("");
 
-//   const [formState, action, isPending] = useActionState(createArticles, {
-//     errors: {},
-//   });
+  const [formState, action, isPending] = useActionState(createArticles, {
+    errors: {},
+  });
  
 
-//   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-//     event.preventDefault();
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
 
-//     const formData = new FormData(event.currentTarget);
-//     formData.append("content", content);
+    const formData = new FormData(event.currentTarget);
+    formData.append("content", content);
 
-//     // Wrap the action call in startTransition
-//     startTransition(() => {
-//       action(formData);
-//     });
-//   };
+    // Wrap the action call in startTransition
+    startTransition(() => {
+      action(formData);
+    });
+  };
  
   return (
     <div className="max-w-4xl mx-auto p-6">
@@ -37,7 +37,7 @@ export function CreateArticlePage() {
           <CardTitle className="text-2xl">Create New Article</CardTitle>
         </CardHeader>
         <CardContent>
-          <form className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-2">
               <Label htmlFor="title">Article Title</Label>
               <Input
@@ -45,11 +45,11 @@ export function CreateArticlePage() {
                 name="title"
                 placeholder="Enter article title"
               />
-              {/* {formState.errors.title && (
+              {formState.errors.title && (
                 <span className="font-medium text-sm text-red-500">
                   {formState.errors.title}
                 </span>
-              )} */}
+              )}
             </div>
 
             <div className="space-y-2">
@@ -64,11 +64,11 @@ export function CreateArticlePage() {
                 <option value="programming">Programming</option>
                 <option value="web-development">Web Development</option>
               </select>
-              {/* {formState.errors.category && (
+              {formState.errors.category && (
                 <span className="font-medium text-sm text-red-500">
                   {formState.errors.category}
                 </span>
-              )} */}
+              )}
             </div>
 
             <div className="space-y-2">
@@ -79,11 +79,11 @@ export function CreateArticlePage() {
                 type="file"
                 accept="image/*"
               />
-              {/* {formState.errors.featuredImage && (
+              {formState.errors.featuredImage && (
                 <span className="font-medium text-sm text-red-500">
                   {formState.errors.featuredImage}
                 </span>
-              )} */}
+              )}
             </div>
 
             <div className="space-y-2">
@@ -93,27 +93,26 @@ export function CreateArticlePage() {
                 value={content}
                 onChange={setContent} 
               />
-              {/* {formState.errors.content && (
+              {formState.errors.content && (
                 <span className="font-medium text-sm text-red-500">
                   {formState.errors.content[0]}
                 </span>
-              )} */}
+              )}
             </div>
-            {/* {formState.errors.formErrors && (
+            {formState.errors.formErrors && (
               <div className="dark:bg-transparent bg-red-100 p-2 border border-red-600">
                 <span className="font-medium text-sm text-red-500">
                   {formState.errors.formErrors}
                 </span>
               </div>
-            )} */}
+            )}
             <div className="flex justify-end gap-4">
               <Button type="button" variant="outline">
                 Cancel
               </Button>
-              {/* <Button disabled={isPending} type="submit">
+              <Button disabled={isPending} type="submit">
                 {isPending ? "Loading..." : "Publish Article"}
-              </Button> */}
-              <Button type="submit">Publish Article</Button>
+              </Button>
             </div>
           </form>
         </CardContent>
