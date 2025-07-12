@@ -2,30 +2,29 @@ import { Card } from "@/components/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { prisma } from "@/lib/prisma";
 import Image from "next/image";
 
 export async function TopArticles() {
-  // Dummy data instead of Prisma
-  const articles = [
-    {
-      id: "1",
-      title: "The Rise of TypeScript",
-      category: "Programming",
-      featuredImage:
-        "https://plus.unsplash.com/premium_photo-1720744786849-a7412d24ffbf?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8YmxvZ3xlbnwwfHwwfHx8MA%3D%3D",
-      createdAt: new Date(),
-      comments: [],
+  const articles = await prisma.articles.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
+    include: {
+      comments: true,
       author: {
-        name: "Alice",
-        email: "alice@example.com",
-        imageUrl: "https://via.placeholder.com/100",
+        select: {
+          name: true,
+          email: true,
+          imageUrl: true,
+        },
       },
     },
-  ];
+  });
 
   return (
     <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-      {articles.slice(0, 1).map((article) => (
+      {articles.slice(0, 3).map((article) => (
         <Card
           key={article.id}
           className={cn(
@@ -39,7 +38,7 @@ export async function TopArticles() {
               {/* Image Container */}
               <div className="relative mb-4 h-48 w-full overflow-hidden rounded-xl">
                 <Image
-                  src={article.featuredImage}
+                  src={article.featuredImage as string}
                   alt={article.title}
                   fill
                   className="object-cover"
@@ -49,7 +48,7 @@ export async function TopArticles() {
               {/* Author Info */}
               <div className="flex items-center gap-3 text-sm text-gray-500 dark:text-gray-400">
                 <Avatar className="h-8 w-8">
-                  <AvatarImage src={article.author.imageUrl} />
+                  <AvatarImage src={article.author.imageUrl as string} />
                   <AvatarFallback>
                     {article.author.name.charAt(0)}
                   </AvatarFallback>
