@@ -1,33 +1,25 @@
-// import { Navbar } from "@/components/home/header/navbar";
-import { prisma } from "@/lib/prisma";
-import { currentUser } from "@clerk/nextjs/server";
+import "../globals.css";
 import React from "react";
+import { ClerkProvider } from "@clerk/nextjs";
+import { Inter } from "next/font/google";
+import { Navbar } from "@/components/home/header/navbar";
 
-const layout = async ({ children }: { children: React.ReactNode }) => {
- 
-  const user = await currentUser();
-  if (!user) {
-    return null;
-  }
-  const loggedInUser = await prisma.user.findUnique({
-    where: { clerkUserId: user.id },
-  });
-  if (!loggedInUser) {
-    await prisma.user.create({
-      data: {
-        name: user.fullName as string,
-        clerkUserId: user.id,
-        email: user.emailAddresses[0].emailAddress,
-        imageUrl: user.imageUrl,
-      },
-    });
-  }
-  return (
-    <div>
-      {/* <Navbar /> */}
-      {children}
-    </div>
-  );
+const inter = Inter({ subsets: ["latin"] });
+
+export const metadata = {
+  title: "ByteCode",
+  description: "Learn, Build, Share.",
 };
 
-export default layout;
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <ClerkProvider>
+      <html lang="en">
+        <body className={inter.className}>
+          <Navbar />
+          {children}
+        </body>
+      </html>
+    </ClerkProvider>
+  );
+}

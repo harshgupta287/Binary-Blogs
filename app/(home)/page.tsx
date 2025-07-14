@@ -1,5 +1,5 @@
 import { BlogFooter } from "@/components/home/blog-footer";
-import { Navbar } from "@/components/home/header/navbar";
+// import { Navbar } from "@/components/home/header/navbar";
 import HeroSection from "@/components/home/hero-section";
 import { TopArticles } from "@/components/home/top-articles";
 import { Button } from "@/components/ui/button";
@@ -9,7 +9,7 @@ import React, { Suspense } from "react";
 const page = async () => {
   return (
     <main>
-      <Navbar />
+      {/* <Navbar /> */}
       <HeroSection />
       <section className="relative py-16 md:py-24">
         <div className="container mx-auto px-4">
