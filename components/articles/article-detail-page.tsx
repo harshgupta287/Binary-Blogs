@@ -5,9 +5,8 @@ import { Prisma } from "@prisma/client";
 import CommentForm from "../comments/comment-form";
 import CommentList from "../comments/comment-list";
 import { prisma } from "@/lib/prisma"; 
-// import LikeButton from "./actions/like-button";
+import LikeButton from "./actions/like-button";
 import { auth } from "@clerk/nextjs/server";
-import LikeButton from "./like-button";
 
 type ArticleDetailPageProps = {
   article: Prisma.ArticlesGetPayload<{
@@ -87,8 +86,10 @@ export async function ArticleDetailPage({ article }: ArticleDetailPageProps) {
             dangerouslySetInnerHTML={{ __html: article.content }}
           />
 
+          {/* Article Actions */}
           <LikeButton articleId={article.id} likes={likes} isLiked = {isLiked}/>
 
+          {/* Comments Section */}
           <Card className="p-6">
             <div className="flex items-center gap-2 mb-8">
               <MessageCircle className="h-6 w-6 text-primary" />
@@ -97,8 +98,10 @@ export async function ArticleDetailPage({ article }: ArticleDetailPageProps) {
               </h2>
             </div>
 
+            {/* Comment Form */}
             <CommentForm articleId={article.id} />
 
+            {/* Comments List */}
             <CommentList comments={comments} />
           </Card>
         </article>
