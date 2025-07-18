@@ -1,6 +1,12 @@
 "use client";
+
 import React, { useState } from "react";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+  SheetTitle,
+} from "@/components/ui/sheet";
 import { Button } from "../ui/button";
 import {
   BarChart,
@@ -10,6 +16,8 @@ import {
   Settings,
 } from "lucide-react";
 import Link from "next/link";
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
+
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -23,9 +31,14 @@ const Sidebar = () => {
           </Button>
         </SheetTrigger>
         <SheetContent side="left" className="w-[250px]">
+          <SheetTitle>
+            <VisuallyHidden>Sidebar Navigation</VisuallyHidden>
+          </SheetTitle>
           <DashboardSidebar closeSheet={() => setIsOpen(false)} />
         </SheetContent>
       </Sheet>
+
+      {/* Desktop Sidebar */}
       <div className="hidden md:block h-screen w-[250px] border-r bg-background">
         <DashboardSidebar />
       </div>
@@ -40,7 +53,7 @@ function DashboardSidebar({ closeSheet }: { closeSheet?: () => void }) {
     <div className="h-full px-4 py-6">
       <div className="flex items-center gap-2 mb-8 px-2">
         <Link href={"/"}>
-        <span className="text-xl font-bold">ByteCode</span>
+          <span className="text-xl font-bold">BinaryBlogs</span>
         </Link>
       </div>
       <nav className="space-y-1">
@@ -65,6 +78,7 @@ function DashboardSidebar({ closeSheet }: { closeSheet?: () => void }) {
             Articles
           </Button>
         </Link>
+
         <Button
           variant="ghost"
           className="w-full justify-start"
@@ -73,6 +87,7 @@ function DashboardSidebar({ closeSheet }: { closeSheet?: () => void }) {
           <MessageCircle className="mr-2 h-4 w-4" />
           Comments
         </Button>
+
         <Button
           variant="ghost"
           className="w-full justify-start"
@@ -81,6 +96,7 @@ function DashboardSidebar({ closeSheet }: { closeSheet?: () => void }) {
           <BarChart className="mr-2 h-4 w-4" />
           Analytics
         </Button>
+
         <Button
           variant="ghost"
           className="w-full justify-start"

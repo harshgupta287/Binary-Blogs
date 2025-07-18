@@ -17,7 +17,7 @@ model User {
   role        String?
   articles    Articles[]
   comments    Comment[]
-  likes       Like[] // A user can like multiple articles
+  likes       Like[]
 }
 
 model Articles {
@@ -26,31 +26,31 @@ model Articles {
   content       String
   category      String
   featuredImage String
-  author        User      @relation(fields: [authorId], references: [id])
   authorId      String
-  comments      Comment[]
-  likes         Like[] // An article can have multiple likes
   createdAt     DateTime  @default(now())
+  author        User      @relation(fields: [authorId], references: [id])
+  comments      Comment[]
+  likes         Like[]
 }
 
 model Comment {
   id        String   @id @default(cuid())
   body      String
   articleId String
-  article   Articles @relation(fields: [articleId], references: [id])
   authorId  String
-  author    User     @relation(fields: [authorId], references: [id])
   createdAt DateTime @default(now())
+  article   Articles @relation(fields: [articleId], references: [id])
+  author    User     @relation(fields: [authorId], references: [id])
 }
 
 model Like {
   id        String   @id @default(cuid())
   isLiked   Boolean  @default(false)
-  user      User     @relation(fields: [userId], references: [id])
   userId    String
-  article   Articles @relation(fields: [articleId], references: [id])
   articleId String
   createdAt DateTime @default(now())
+  article   Articles @relation(fields: [articleId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
 
-  @@unique([userId, articleId]) // Ensures a user can like an article only once
+  @@unique([userId, articleId])
 }

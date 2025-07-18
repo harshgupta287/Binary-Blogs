@@ -7,19 +7,17 @@ import { Navbar } from "@/components/home/header/navbar";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "ByteCode",
+  title: "BinaryBlogs",
   description: "Learn, Build, Share.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <ClerkProvider>
-      <html lang="en">
-        <body className={inter.className}>
-          <Navbar />
-          {children}
-        </body>
-      </html>
+      <div className={inter.className}>
+        <Navbar />
+        {children}
+      </div>
     </ClerkProvider>
   );
 }
