@@ -49,8 +49,8 @@ Follow the steps below to run the project locally:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/binaryblogs.git
-cd binaryblogs
+https://github.com/harshgupta287/Binary-Blogs.git
+cd Binary-Blogs
 ```
 
 ---
