@@ -62,7 +62,7 @@ npm install
 
 ---
 
-###3. Configure Environment Variables
+### 3. Configure Environment Variables
 **Example `.env.local` file:**
 ```
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
@@ -75,12 +75,12 @@ CLOUDINARY_API_SECRET=
 
 ---
 
-###▶️ How to Run
+### ▶️ How to Run
 ```bash
 npm run dev
 ```
 
-##💡 Usage
+## 💡 Usage
 - Register or log in with your account.
 - Create, edit, or delete blog posts through the user-friendly UI.
 - Enjoy writing and managing content with ease!
